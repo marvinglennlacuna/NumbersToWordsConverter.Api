@@ -31,7 +31,7 @@ namespace NumbersToWordsConverter.Api.Controllers
             Regex regex = new Regex(@"^[a-zA-Z\s-]+$");
             if ((dataModel.Name == null) || (dataModel.Name == string.Empty))
             {
-                
+
                 var message = Request.CreateResponse(HttpStatusCode.BadRequest,
                 responseMessageService.BadRequestErrorMessage("Name cannot be null or Model is invalid format."));
                 throw new HttpResponseException(message);
@@ -44,10 +44,10 @@ namespace NumbersToWordsConverter.Api.Controllers
             }
 
             regex = new Regex(@"^[0-9,\.]+$");
-            if (!regex.IsMatch(dataModel.Numbers.ToString()) || dataModel.Numbers <= 0)
+            if (!regex.IsMatch(dataModel.Numbers.ToString()) || dataModel.Numbers <= 0 || dataModel.Numbers > 9999999)
             {
                 var message = Request.CreateResponse(HttpStatusCode.BadRequest,
-                responseMessageService.BadRequestErrorMessage("Numbers must be numberic value from 1 up to 9,999,999 million"));
+                responseMessageService.BadRequestErrorMessage("Numbers must be numeric value from 1 up to 9,999,999 million"));
                 throw new HttpResponseException(message);
             }
         }
